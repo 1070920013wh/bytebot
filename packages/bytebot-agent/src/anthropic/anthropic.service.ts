@@ -27,6 +27,7 @@ export class AnthropicService implements BytebotAgentService {
 
   constructor(private readonly configService: ConfigService) {
     const apiKey = this.configService.get<string>('ANTHROPIC_API_KEY');
+    const baseURL = this.configService.get<string>('ANTHROPIC_BASE_URL');
 
     if (!apiKey) {
       this.logger.warn(
@@ -36,6 +37,7 @@ export class AnthropicService implements BytebotAgentService {
 
     this.anthropic = new Anthropic({
       apiKey: apiKey || 'dummy-key-for-initialization',
+      baseURL: baseURL || undefined,
     });
   }
 
